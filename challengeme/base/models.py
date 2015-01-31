@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import Challenge, User, Instance, Owner, Participant, Supporter
+from django.contrib.auth.models import Challenge, User, Charity, Instance, Owner, Participant, Supporter
 
 class Challenge(models.Model):
 	owner = models.ForeignKey(User)
@@ -12,7 +12,7 @@ class User(models.Model):
 
 class Charity(models.Model):
 	pass
-	
+
 
 class Instance(models.Model):
 	pass
