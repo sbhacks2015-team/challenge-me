@@ -7,7 +7,7 @@ class Charity(models.Model):
     description = models.CharField(max_length=60000)
     #TODO: add min_length
     #bitcoin_address = models.CharField(min_length=26, max_length=35)
-    bitcoin_address = models.CharField(max_length=35)
+    bitcoin_address = models.CharField(max_length=35, default="1FtQU9X78hdshngJiCBw9tbE2MYpx87eLT")
 
 
 class Challenge(models.Model):
