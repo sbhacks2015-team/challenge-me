@@ -29,7 +29,7 @@ class UserDashboard(ListView):
 
     def get(self, request):
         if not request.user.is_authenticated():
-            return render_to_response('base/templates/home.html')
+            return render_to_response('challenges.html')
         else:
             return TemplateResponse(request, template_name, context)
         
@@ -47,7 +47,7 @@ class AllChallengesView(ListView):
 
     def get(self, request):
         if not request.user.is_authenticated():
-            return render_to_response('base/templates/home.html')
+            return render_to_response('challenges.html')
         else:
             return TemplateResponse(request, template_name, context)
 
