@@ -8,6 +8,7 @@ class Charity(models.Model):
     #TODO: add min_length
     #bitcoin_address = models.CharField(min_length=26, max_length=35)
     bitcoin_address = models.CharField(max_length=35, default="1FtQU9X78hdshngJiCBw9tbE2MYpx87eLT")
+    balance = models.DecimalField(default=0.00000000, max_digits=14, decimal_places=8)
 
 
 class Challenge(models.Model):
@@ -26,7 +27,8 @@ class Instance(models.Model):
     note = models.CharField(max_length=60000)
     release_date = models.DateField(auto_now_add=True)
     goal_date = models.DateField()
-    bounty = models.DecimalField(max_digits=14, decimal_places=8)
+    bounty = models.DecimalField(blank=False, max_digits=14, decimal_places=8)
+    balance = models.DecimalField(default=0.00000000, max_digits=14, decimal_places=8)
 
     owner = models.ForeignKey(User)
     participants = models.ManyToManyField(User, related_name="participants")
