@@ -2,6 +2,7 @@ from django.shortcuts import render, render_to_response
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from django.http import HttpResponse
 import datetime
+from django.template.response import TemplateResponse
 
 from challengeme.base.models import Challenge, Instance, User, Charity
 
