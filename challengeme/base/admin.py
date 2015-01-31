@@ -1,5 +1,5 @@
 from django.contrib import admin
-from base.models import Challenge, Instance, Charity, Profile
+from challengeme.base.models import Challenge, Instance, Charity, Profile
 
 admin.site.register(Challenge)
 admin.site.register(Instance)

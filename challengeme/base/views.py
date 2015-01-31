@@ -1,16 +1,15 @@
 from django.shortcuts import render, render_to_response
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from django.http import HttpResponse
 import datetime
 
-from base.models import Challenge, Instance, User, Charity
+from challengeme.base.models import Challenge, Instance, User, Charity
 
 class LandingPage(TemplateView):
     template_name = "home.html"
 
 def poop(request):
     now = datetime.datetime.now()
-    context['poop'] = ['a', 'b', 'c']
     html = "<html>sup bae it's %s</html>" % now
     return HttpResponse(html)
 
@@ -55,10 +54,5 @@ class AddChallenge(CreateView):
     # Creating new challenge, and instance of the challenge
     model = Challenge
     fields = ['title', 'description', 'owner', 'charity']
-    fields.append('note', 'goal_date', 'bounty', 'participants', 'supporters')
+    fields.append(['note', 'goal_date', 'bounty', 'participants', 'supporters'])
 
-class ChallengeForm(ModelForm):
-    model = Challenge
-
-class InstanceInline(ModelForm):
-    model = Instance
