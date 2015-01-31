@@ -1,7 +1,7 @@
 from django.shortcuts import render, render_to_response
 from django.views.generic import TemplateView
 
-from base.models import Challenge, Instance, User
+from base.models import Challenge, Instance, User, Charity
 
 class LandingPage(TemplateView):
     template_name = "home.html"
@@ -13,8 +13,11 @@ class UserDashboard(DetailView):
         context = super(Dashboard, self).get_context_data(**kwargs)
         
         # Get context objects.
-        context['own_challenges'] = Instance.objects.filter(challenge__owner=self.request.user)
-        context['challenges_in'] = Challenge.objects.filter(self.request.user in challenge__participants) 
+
+        context['own_challenges'] = Instance.objects.filter(owner=self.request.user)
+        context['challenges_in'] = self.request.user.participants_set.all()
+        context['challenges_supporting'] = self.request.user.supporters_set.all()
+
         return context
 
     def get(self, request):
@@ -31,10 +34,10 @@ class AllChallengesView(ListView):
     def get_context_data(self, **kwargs):
 
         context = super(AllChallengesView, self).get_context_data(**kwargs)
-        context['public_challenges'] = Challenge.objects.all().order_by('-date')
+        context['public_challenges'] = Instance.objects.all() 
 
         # is_friend method in User model: returns True if user is in friends
-        context['friends_challenges'] = Challenge.objects.filter(self.request.user.is_friend(challenge__owner))
+        #  context['friends_challenges'] = Challenge.objects.filter(self.request.user.is_friend(challenge__owner))
 
         return context
 

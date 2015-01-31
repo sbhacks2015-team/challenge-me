@@ -1,3 +1,4 @@
+a
 from django.db import models
 from django.contrib.auth.models import Challenge, Instance, User, Charity
 
@@ -11,6 +12,7 @@ class Challenge(models.Model):
 
 
 class Instance(models.Model):
+        title = models.CharField(max_length=256)
 	context_id = models.IntegerField(primary_key=True)
 	note = models.CharField(max_length=60000)
 	release_date = models.DateField(auto_now_add=True)
@@ -19,8 +21,8 @@ class Instance(models.Model):
 
 	owner = models.ForeignKey(User)
 	challenge = models.ForeignKey(Challenge)
-	participants = models.ManyToMany(User)
-	supporters = models.ManyToMany(User)
+	participants = models.ManyToMany(User, related_name="participants")
+	supporters = models.ManyToMany(User, related_name="supporters")
 
 
 class User(models.Model):
