@@ -60,11 +60,11 @@ WSGI_APPLICATION = 'challengeme.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'basedb',
-	'USER': 'basedadmin',
-	'PASSWORD': 'live',
-	'HOST': 'localhost',
-	'PORT': '',
+        'NAME': 'baseddb',
+        'USER': 'admin',
+      	'PASSWORD': 'live',
+      	'HOST': 'localhost',
+      	'PORT': '',
     }
 }
 
