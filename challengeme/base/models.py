@@ -25,7 +25,7 @@ class Instance(models.Model):
     note = models.CharField(max_length=60000)
     release_date = models.DateField(auto_now_add=True)
     goal_date = models.DateField()
-    bounty = models.DecimalField(max_digits=10, decimal_places=8)
+    bounty = models.DecimalField(max_digits=14, decimal_places=8)
 
     owner = models.ForeignKey(User)
     challenge = models.ForeignKey(Challenge)
