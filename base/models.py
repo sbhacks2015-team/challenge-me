@@ -5,7 +5,9 @@ class Charity(models.Model):
     name = models.CharField(blank=False, max_length=256)
     email = models.CharField(max_length=256)
     description = models.CharField(max_length=60000)
-    bitcoin_address = models.CharField(min_length=26, max_length=35)
+    #TODO: add min_length
+    #bitcoin_address = models.CharField(min_length=26, max_length=35)
+    bitcoin_address = models.CharField(max_length=35)
 
 
 class Challenge(models.Model):
@@ -17,8 +19,10 @@ class Challenge(models.Model):
 
 class Instance(models.Model):
     challenge = models.ForeignKey(Challenge)
-    default_title = challenge.title
-    title = models.CharField(blank=False, default=default_title, max_length=256)
+    #TODO: add default title parameter
+    # default_title = challenge.title
+    # title = models.CharField(blank=False, default=default_title, max_length=256)
+    title = models.CharField(blank=False, max_length=256)
     note = models.CharField(max_length=60000)
     release_date = models.DateField(auto_now_add=True)
     goal_date = models.DateField()
