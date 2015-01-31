@@ -1,18 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-#class User(models.Model):
-    #context_id = models.IntegerField(primary_key=True)
-    #username = models.CharField(max_length=100)
-    #email = models.CharField(max_length=256)
-
 class Charity(models.Model):
-    #context_id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=256)
     description = models.CharField(max_length=60000)
+    bitcoin_address = models.CharField(min_length=26, max_length=35)
+
 
 class Challenge(models.Model):
-    #context_id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=256)
     description = models.CharField(max_length=60000)
     owner = models.ForeignKey(User)
@@ -21,7 +16,6 @@ class Challenge(models.Model):
 
 class Instance(models.Model):
     title = models.CharField(max_length=256)
-    #context_id = models.IntegerField(primary_key=True)
     note = models.CharField(max_length=60000)
     release_date = models.DateField(auto_now_add=True)
     goal_date = models.DateField()
