@@ -12,7 +12,7 @@ class InstanceTestCase(TestCase):
     
         challenge = Challenge.objects.create(title="Lose 10 Pounds", description="poopoo", owner=j, charity=charity)
 
-        Instance.objects.create(title="Lose 10 Pounds", note="hahaha", goal_date=datetime.now()+datetime.timedelta(days=1), bounty="100.01", owner=d, challenge=challenge)
+        Instance.objects.create(title="Lose 10 Pounds", note="hahaha", goal_date=datetime.datetime.now()+datetime.timedelta(days=1), bounty="100.01", owner=d, challenge=challenge)
 
     def test_add_supporters(self):
         j = User.objects.get(name="Jackie")
