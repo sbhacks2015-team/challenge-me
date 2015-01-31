@@ -11,12 +11,11 @@ class UserDashboard(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(Dashboard, self).get_context_data(**kwargs)
-        
-        # Get context objects.
 
+        # Get context objects.
         context['own_challenges'] = Instance.objects.filter(owner=self.request.user)
-        context['challenges_in'] = self.request.user.participants_set.all()
-        context['challenges_supporting'] = self.request.user.supporters_set.all()
+        context['challenges_in'] = self.request.user.participants.all()
+        context['challenges_supporting'] = self.request.user.supporters.all()
 
         return context
 
@@ -36,9 +35,6 @@ class AllChallengesView(ListView):
         context = super(AllChallengesView, self).get_context_data(**kwargs)
         context['public_challenges'] = Instance.objects.all() 
 
-        # is_friend method in User model: returns True if user is in friends
-        #  context['friends_challenges'] = Challenge.objects.filter(self.request.user.is_friend(challenge__owner))
-
         return context
 
     def get(self, request):
@@ -48,6 +44,13 @@ class AllChallengesView(ListView):
             return TemplateResponse(request, template_name, context)
 
 class AddChallenge(CreateView):
+    # Creating new challenge, and instance of the challenge
     model = Challenge
-    fields = ['title', 'owner', 'participant_list', 'supporter_list', 'description', ]
+    fields = ['title', 'description', 'owner', 'charity']
+    fields.append('note', 'goal_date', 'bounty', 'participants', 'supporters')
 
+class ChallengeForm(ModelForm):
+    model = Challenge
+
+class InstanceInline(ModelForm):
+    model = Instance
