@@ -6,7 +6,13 @@ from base.models import Challenge, Instance, User, Charity
 class LandingPage(TemplateView):
     template_name = "home.html"
 
-class UserDashboard(DetailView):
+def poop(request):
+    now = datetime.datetime.now()
+    context['poop'] = ['a', 'b', 'c']
+    html = "<html>sup bae it's %s</html>" % now
+    return HttpResponse(html)
+
+class UserDashboard(ListView):
     template_name = "dashboard.html"
 
     def get_context_data(self, **kwargs):
