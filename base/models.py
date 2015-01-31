@@ -7,7 +7,7 @@ class Charity(models.Model):
     description = models.CharField(max_length=60000)
     #TODO: add min_length
     #bitcoin_address = models.CharField(min_length=26, max_length=35)
-    bitcoin_address = models.CharField(max_length=35, default="1FtQU9X78hdshngJiCBw9tbE2MYpx87eLT")
+    bitcoin_address = models.CharField(max_length=35)
     balance = models.DecimalField(default=0.00000000, max_digits=14, decimal_places=8)
 
 
@@ -35,4 +35,7 @@ class Instance(models.Model):
     supporters = models.ManyToManyField(User, related_name="supporters")
 
 
-
+class Profile(models.Model):
+    user = models.OneToOneField(User, primary_key=True)
+    balance = models.DecimalField(default=0.00000000, max_digits=14, decimal_places=8)
+    bitcoin_address = models.CharField(max_length=35)
