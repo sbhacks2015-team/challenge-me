@@ -36,7 +36,7 @@ class UserDashboard(ListView):
     
 class AllChallengesView(ListView):
     model = Challenge
-
+    template_name = 'challenges.html'
 
     def get_context_data(self, **kwargs):
 
@@ -45,11 +45,8 @@ class AllChallengesView(ListView):
 
         return context
 
-    def get(self, request):
-        if not request.user.is_authenticated():
-            return render_to_response('challenges.html')
-        else:
-            return TemplateResponse(request, template_name, context)
+   # def get(request, template_name='challenges.html', context):
+   #     return render_to_response(request, template_name, context)
 
 class AddChallenge(CreateView):
     # Creating new challenge, and instance of the challenge
