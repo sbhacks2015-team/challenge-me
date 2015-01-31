@@ -1,5 +1,7 @@
 from django.shortcuts import render, render_to_response
 from django.views.generic import TemplateView
+from django.http import HttpResponse
+import datetime
 
 from base.models import Challenge, Instance, User, Charity
 
