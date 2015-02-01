@@ -1,5 +1,5 @@
 from django.test import TestCase
-from base.models import Challenge, Instance, Charity
+from challengeme.base.models import Challenge, Instance, Charity
 from django.contrib.auth.models import User
 import datetime
 # Create your tests here.

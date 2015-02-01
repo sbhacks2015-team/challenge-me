@@ -1,35 +1,51 @@
 <!DOCTYPE html>
-<html>
-  <head>
-  </head>
-  <body>
-    <h3>Instance Name:</h3>
-    <p>{{instance.title}}</p>
-    <h3>Challenge:</h3>
-    <p>{{instance.challenge}}</p>
-    <h3>Challenge description:</h3>
-    <p>{{instance.challenge.description}}</p>
-    <h3>Note:</h3>
-    <p>{{instance.note}}</p>
-    <h3>Release Date:</h3>
-    <p>{{instance.release_date}}</p>
-    <h3>Goal Date:</h3>
-    <p>{{instance.goal_date}}</p>
-    <h3>Bounty:</h1>
-    <p>{{instance.bounty }} BTC</p>
-    <h3>Balance:</h3>
-    <p>{{instance.balance}} BTC</p>
-    <!--<h3>Percentage of goal reached:</h3>
-    <p>{{instance.percentage}}</p>-->
-    <h3>Instance creator:</h3>
-    <p>{{instance.owner}}</p>
-    <h3>Participants: </h3>
-    {% for participant in instance.participants.all %}
-      <p>{{participant}}</p>
-    {% endfor %}
-    <h3>Supporters:</h3>
-    {% for supporter in instance.supporters.all %}
-      <p>{{supporter}}</p>
-    {% endfor %}
-  </body>
-</html>
+{% extends "layout.html" %}
+{% load staticfiles %}
+{% block style %}
+<link href="{% static "css/instance.css" %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <h1 class="page-header text-center" style="font-size: 48px;">{{ instance.title }}<small> by {{ instance.owner }}</small></h1>
+    <div class="container-fluid">
+      <div class="row" style="overflow-x: none;">
+        <div class="col-md-8"><img src="http://placehold.it/900x600" class="img-responsize" style="width: 100%;"></div>  
+        <div class="col-md-4">
+          <h2 class="text-left">{{ instance.supporters.all|length }}<small><br> supporte{{ instance.supporters.all|length|pluralize:"r,rs" }}</small></h2>
+          <h2 class="text-left">{{ instance.balance }}<small><br> pledged of {{ instance.bounty|floatformat }}BTC goal</small></h2>
+          <h2 class="text-left">{{ instance.goal_date|timeuntil }}<small><br> to go</small></h2>
+          {% if instance.goal_date|timeuntil > 0 %}
+            <button type="button" class="btn btn-primary btn-lg btn-block">Pledge your support!</button>
+          {% else %}
+          <button type="button" class="btn btn-primary btn-lg btn-block disabled">Time's Up!</button>
+          {% endif %}
+        </div>
+      </div>
+      <div class="row instance-info">
+        <div class="col-md-8">
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow={{ instance.percentage }} aria-valuemin="0" aria-valuemax="100"><span class="sr-only">{{ instance.percentage }} complete</span>
+            </div>
+          </div>
+          <p class="lead">
+            {{ instance.challenge.description }}  
+          </p>
+        </div>  
+        <div class="col-md-4"><h4>Created By:</h4>{{ instance.owner.profile.name }}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <p>{{ instance.note }}</p>
+        </div>
+        <div class="col-md-4">
+          <h4>Participants</h4>
+          {% for participant in instance.participants.all %}
+          {{ participant}} 
+          {% endfor %}
+          <h4>Supporters:</h4>
+          {% for supporter in instance.supporters.all %}
+            <p>{{supporter}}</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endblock %}
