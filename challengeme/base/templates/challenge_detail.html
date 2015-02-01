@@ -9,5 +9,9 @@
       <p>{{ challenge.owner }}</p>
       <h3>Associated Charity:</h3>
       <p>{{ challenge.charity }}</p>
+      <h3>List of Instances: </h3>      
+      {% for instance in challenge.instance_set.all %}
+        <p>{{ instance }}</p>
+      {% endfor %}
   </body>
 </html>
