@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html>
 <body>
+  {{ user }}
+  {{ user.participants.all }}
   <ul>
-    {% for challenge in own_challenges %}
-      <li>{{ challenge.title }} owned by {{ challenge.owner }}</li>
-    {% endfor %}
-  </ul>
-  <ul>
-    {% for challenge in challenges_in %}
+    {% for challenge in public_challenges %}
       <li>{{ challenge.title }} owned by {{ challenge.owner }}</li>
     {% endfor %}
   </ul>
