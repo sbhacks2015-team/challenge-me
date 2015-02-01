@@ -15,7 +15,7 @@ class LandingPage(TemplateView):
 def new_challenge(request):
     #import pdb; pdb.set_trace()
     if request.method == "POST":
-        cform = ChallengeForm(request.POST, instance=Challenge)
+        cform = ChallengeForm(request.POST)
 #        iform = InstanceForm(request.POST instance=Challenge)
 #        if cform.is_valid() and iform.is_valid():
 #            new_challenge = cform.save()
