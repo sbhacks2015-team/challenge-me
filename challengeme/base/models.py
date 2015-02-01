@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class Charity(models.Model):
     name = models.CharField(blank=False, max_length=256)
-    email = models.CharField(max_length=256)
+    email = models.EmailField(max_length=254)
     description = models.CharField(max_length=60000)
     #TODO: add min_length
     #bitcoin_address = models.CharField(min_length=26, max_length=35)
@@ -51,6 +51,8 @@ class Profile(models.Model):
     bitcoin_address = models.CharField(max_length=35)
     first_name = models.CharField(blank=False, default="null", max_length=30)
     last_name = models.CharField(blank=False, default="null", max_length=40)
-    email = models.CharField(blank=False, default="null", max_length=256)
+    email = models.EmailField(blank=False, default="null", max_length=254)
+
     def __str__(self):
         return "Profile for %s" % str(self.user)
+
