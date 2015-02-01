@@ -46,6 +46,7 @@ class ChallengeDetailView(DetailView):
 class InstanceDetailView(DetailView):
     # called from url pattern r'^go/<id>/ or some shiet like that 
     model = Instance
+    template_name = "instance_detail.html"
 
     def get_context_data(self, **kwargs):
         context = super(InstanceDetailView, self).get_context_data(**kwargs)

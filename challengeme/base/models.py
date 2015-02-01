@@ -35,7 +35,8 @@ class Instance(models.Model):
     goal_date = models.DateField()
     bounty = models.DecimalField(blank=False, max_digits=14, decimal_places=8)
     balance = models.DecimalField(default=0.00000000, max_digits=14, decimal_places=8)
-
+    #TODO can't divide DecimalField s
+    # percentage = models.DecimalField(balance.__float__() / bounty.__float__() or "No bounty!", max_digits=14, decimal_places=8)
     owner = models.ForeignKey(User)
     participants = models.ManyToManyField(User, related_name="participants")
     supporters = models.ManyToManyField(User, related_name="supporters")

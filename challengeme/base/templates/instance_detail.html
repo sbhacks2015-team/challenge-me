@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h3>Instance Name:</h3>
+    <p>{{instance.title}}</p>
+    <h3>Challenge:</h3>
+    <p>{{instance.challenge}}</p>
+    <h3>Note:</h3>
+    <p>{{instance.note}}</p>
+    <h3>Release Date:</h3>
+    <p>{{instance.release_date}}</p>
+    <h3>Goal Date:</h3>
+    <p>{{instance.goal_date}}</p>
+    <h3>Bounty:</h1>
+    <p>{{instance.bounty }} BTC</p>
+    <h3>Balance:</h3>
+    <p>{{instance.balance}} BTC</p>
+    <!--<h3>Percentage of goal reached:</h3>
+    <p>{{instance.percentage}}</p>-->
+    <h3>Instance creator:</h3>
+    <p>{{instance.owner}}</p>
+    <h3>Participants: </h3>
+    {% for participant in instance.participants.all %}
+      <p>{{participant}}</p>
+    {% endfor %}
+    <h3>Supporters:</h3>
+    {% for supporter in instance.supporters.all %}
+      <p>{{supporter}}</p>
+    {% endfor %}
+  </body>
+</html>
