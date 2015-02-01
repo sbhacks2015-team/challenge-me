@@ -1,6 +1,6 @@
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 import datetime
 from django.template.response import TemplateResponse
 from django.contrib.auth.decorators import login_required
@@ -17,7 +17,7 @@ def new_challenge(request):
     #import pdb; pdb.set_trace()
     if request.method == "POST":
         ChallengeFormSet = modelform_factory(Challenge)
-        cform = ChallengeFormSet()
+        cform = ChallengeFormSet(request.POST)
         if cform.is_valid():
             new_challenge = cform.save()
             return HttpResponseRedirect('/dashboard/')
