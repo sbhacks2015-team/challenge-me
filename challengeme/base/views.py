@@ -19,15 +19,15 @@ def poop(request):
 
 
 class UserDashboard(ListView):
-    model = Profile
+    model = Instance
     template_name = "dashboard.html"
 
     def get_context_data(self, **kwargs):
         context = super(UserDashboard, self).get_context_data(**kwargs)
         # Get context objects.
         context['own_challenges'] = Instance.objects.filter(owner=self.request.user)
-        context['challenges_in'] = self.request.user.participants.all
-        context['challenges_supporting'] = self.request.user.supporters.all
+        context['challenges_participating'] = self.request.user.participants.all()
+        context['challenges_supporting'] = self.request.user.supporters.all()
         return context
     
 class AllChallengesView(ListView):

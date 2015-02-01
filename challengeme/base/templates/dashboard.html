@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>User Dashboard!</h1>
+    <h3>List of Instances:</h3>
+    {% for inst in object_list %}
+      <p>{{inst}}</p>
+    {% endfor %}
+    <h3>Profile:</h3>
+    <p>{{user.profile}}</p>
+    <h3>Username:</h3>
+    <p>Welcome, {{user.username}}!</p>
+    <h3>First name:</h3>
+    <p>{{user.profile.first_name}}</p>
+    <h3>Last name:</h3>
+    <p>{{user.profile.last_name}}</p>
+    <h3>Email:</h3>
+    <p>{{user.profile.email}}</p>
+    <h3>Bitcoin address:</h3>
+    <p>{{user.profile.bitcoin_address}}</p>
+    <h3>Own Challenges:</h3>
+    <p>{{own_challenges}}</p>
+    <h3>Participating in these challenges:</h3>
+    <p>{{challenges_participating}}</p>
+    <h3>Supporting these challenges:</h3>
+    <p>{{challenges_supporting}}</p>
+  </body>
+</html>
