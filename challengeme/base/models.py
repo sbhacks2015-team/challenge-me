@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.forms import ModelForm
 
 class Charity(models.Model):
     name = models.CharField(blank=False, max_length=256)
@@ -33,7 +34,7 @@ class Instance(models.Model):
     note = models.CharField(max_length=60000)
     release_date = models.DateField(auto_now_add=True)
     goal_date = models.DateField()
-    bounty = models.DecimalField(blank=False, max_digits=14, decimal_places=8)
+    bounty = models.DecimalField(blank=False, default=0.0, max_digits=14, decimal_places=8)
     balance = models.DecimalField(default=0.00000000, max_digits=14, decimal_places=8)
     #TODO can't divide DecimalField s
     # percentage = models.DecimalField(balance.__float__() / bounty.__float__() or "No bounty!", max_digits=14, decimal_places=8)
@@ -55,4 +56,17 @@ class Profile(models.Model):
 
     def __str__(self):
         return "Profile for %s" % str(self.user)
+
+
+class ChallengeForm(ModelForm):
+    class Meta:
+        model = Challenge
+        fields = ['title', 'description', 'charity']
+
+
+class InstanceForm(ModelForm):
+    class Meta:
+        model = Instance
+        fields = ['challenge', 'title', 'note', 'goal_date', 'bounty', 'participants',]
+
 
