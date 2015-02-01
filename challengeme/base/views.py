@@ -38,7 +38,7 @@ class AllChallengesView(ListView):
 
 class ChallengeDetailView(DetailView):
     model = Challenge
-    
+    template_name = "challenge_detail.html"    
     def get_context_data(self, **kwargs):
         context = super(ChallengeDetailView, self).get_context_data(**kwargs)
         return context
