@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html>
   <body>
-    {% block title %}
-      <h1>{{ challenge.title }}</h1>
-    {% endblock %}
+      <h3>Title</h3>
+      <p>{{ challenge.title }}</p>
+      <h3>Description:</h3>
+      <p>{{ challenge.description }}</p>
+      <h3>Owner:</h3>
+      <p>{{ challenge.owner }}</p>
+      <h3>Associated Charity:</h3>
+      <p>{{ challenge.charity }}</p>
   </body>
 </html>
