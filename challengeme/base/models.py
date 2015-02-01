@@ -49,6 +49,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, primary_key=True)
     balance = models.DecimalField(default=0.00000000, max_digits=14, decimal_places=8)
     bitcoin_address = models.CharField(max_length=35)
-
+    first_name = models.CharField(blank=False, default="null", max_length=30)
+    last_name = models.CharField(blank=False, default="null", max_length=40)
+    email = models.CharField(blank=False, default="null", max_length=256)
     def __str__(self):
         return "Profile for %s" % str(self.user)
