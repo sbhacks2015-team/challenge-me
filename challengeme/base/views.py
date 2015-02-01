@@ -3,9 +3,9 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from django.http import HttpResponse
 import datetime
 from django.template.response import TemplateResponse
-
-from challengeme.base.models import Challenge, Instance, User, Charity, Profile
 from django.contrib.auth.decorators import login_required
+from challengeme.base.forms import ChallengeForm, InstanceForm
+from challengeme.base.models import Challenge, Instance, User, Charity, Profile
 
 
 class LandingPage(TemplateView):
@@ -16,6 +16,17 @@ def poop(request):
     now = datetime.datetime.now()
     html = "<html>sup bae it's %s</html>" % now
     return HttpResponse(html)
+
+def add_own_instance(request):
+    if request.method == "POST":
+        form = ChallengeForm(request.POST)
+        if form.is_valid():
+            return HttpResponseRedirect('/dashboard/')
+    else:
+        form = ChallengeForm(request.POST)
+
+    return render(request, 'testcreate.html', {'form': form})
+
 
 class TestCreate(TemplateView):
     template_name = "testview.html"
