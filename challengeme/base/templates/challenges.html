@@ -3,7 +3,6 @@
 <body>
   {{ user }}
   {{ user.participants.all }}
-  <h1>Test - This is the Challenges page</h1>
   <ul>
     {% for challenge in public_challenges %}
       <li>{{ challenge.title }} owned by {{ challenge.owner }}</li>

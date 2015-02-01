@@ -1,10 +1,11 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, get_object_or_404
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from django.http import HttpResponse
 import datetime
 from django.template.response import TemplateResponse
 
 from challengeme.base.models import Challenge, Instance, User, Charity
+from django.contrib.auth.decorators import login_required
 
 class LandingPage(TemplateView):
     template_name = "home.html"
@@ -19,35 +20,27 @@ class UserDashboard(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(Dashboard, self).get_context_data(**kwargs)
-
         # Get context objects.
         context['own_challenges'] = Instance.objects.filter(owner=self.request.user)
         context['challenges_in'] = self.request.user.participants.all
         context['challenges_supporting'] = self.request.user.supporters.all
 
         return context
-
-    #def get(self, request):
-        #if not request.user.is_authenticated():
-            #return render_to_response('challenges.html')
-        #else:
-            #return TemplateResponse(request, template_name, context)
-        
     
 class AllChallengesView(ListView):
     model = Challenge
     template_name = 'challenges.html'
 
     def get_context_data(self, **kwargs):
-
         context = super(AllChallengesView, self).get_context_data(**kwargs)
         context['public_challenges'] = Instance.objects.all 
-
         return context
 
-class AddChallenge(CreateView):
-    # Creating new challenge, and instance of the challenge
-    model = Challenge
-    fields = ['title', 'description', 'owner', 'charity']
-    fields.append(['note', 'goal_date', 'bounty', 'participants', 'supporters'])
+class InstanceDetailView(DetailView):
+    model = Instance
+
+    def get_context_data(self, **kwargs):
+        context = super(InstanceDetailView, self).get_context_data(**kwargs)
+        return context
+
 
