@@ -17,6 +17,12 @@ def poop(request):
     html = "<html>sup bae it's %s</html>" % now
     return HttpResponse(html)
 
+class TestCreate(TemplateView):
+    template_name = "testview.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super(TestCreate, self).get_context_data(**kwargs)
+        return context
 
 class UserDashboard(ListView):
     model = Instance

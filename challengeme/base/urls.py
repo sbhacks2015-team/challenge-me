@@ -20,4 +20,7 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/$',
         login_required(views.InstanceDetailView.as_view()),
         name='instance'),
+    url(r'^test/$',
+        login_required(views.TestCreate.as_view()),
+        name='testcreate'),
 )
