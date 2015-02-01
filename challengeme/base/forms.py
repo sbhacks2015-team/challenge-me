@@ -1,6 +1,6 @@
 from django import forms
 from django.db import models
-from challengeme.base.models import Challenge, Charity, User
+from challengeme.base.models import Challenge, Charity, User, Instance
 
 
 class ChallengeForm(forms.Form):

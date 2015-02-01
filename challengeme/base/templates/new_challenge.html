@@ -3,8 +3,8 @@
   <body>
     <form action="/newchallenge/" method="post">
       {% csrf_token %}
-      <label for="challenge">Challenge: </label>
-      <input id="challenge" type="text" name="your_name" value="{{cform}}">
+      
+      <input id="challenge" value="{{cform}}">
       <input type="submit" value="OK" />
     </form>
   </body>
