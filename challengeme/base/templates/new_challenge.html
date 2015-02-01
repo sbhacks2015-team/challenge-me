@@ -3,12 +3,8 @@
   <body>
     <form action="/newchallenge/" method="post">
       {% csrf_token %}
-      {{ context }}
-      <h3>Challenge Form</h3>
-      {{ challenge_form }}
-      <h3>Instance Form</h3>
-      {{ iform }}
-      <input type="submit" value="Submit" />
+      {{cform}}
+      <input type="submit" value="OK" />
     </form>
   </body>
 </html>

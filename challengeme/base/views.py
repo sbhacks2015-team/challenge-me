@@ -1,10 +1,11 @@
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 import datetime
 from django.template.response import TemplateResponse
 from django.contrib.auth.decorators import login_required
-from challengeme.base.forms import ChallengeForm, InstanceForm, NameForm
+from django.forms.models import modelform_factory, modelformset_factory
+from challengeme.base.forms import NameForm, ChallengeForm, InstanceForm
 from challengeme.base.models import Challenge, Instance, User, Charity, Profile
 
 
@@ -14,22 +15,18 @@ class LandingPage(TemplateView):
 
 def new_challenge(request):
     #import pdb; pdb.set_trace()
+    ChallengeFormSet = modelform_factory(Challenge)
     if request.method == "POST":
-        cform = ChallengeForm(request.POST, instance=Challenge)
-#        iform = InstanceForm(request.POST instance=Challenge)
-#        if cform.is_valid() and iform.is_valid():
-#            new_challenge = cform.save()
-#            new_instance = iform.save(commit=False)
-#            new_instance.challenge = new_challenge
-#            new_instance.save()
-#            return HttpResponseRedirect('/dashboard/')
+        cform = ChallengeFormSet(request.POST)
+        #cform.owner = request.user.id
+        if cform.is_valid():
+            new_challenge = cform.save()
+            return HttpResponseRedirect('/dashboard/')
     else:
-        cform = ChallengeForm()
-#        iform = InstanceForm()
-#    return render_to_response('new_challenge.html', 
-#            {'challenge_form':cform,'instance_form':iform})
-#            {'cform':cform, 'iform':iform})
-
+        cform = ChallengeFormSet()
+        #cform.owner = request.user
+        
+    return render(request, "new_challenge.html", {'cform': cform, 'iform': iform})
 
 def test_form(request):
     if request.method == 'POST':
