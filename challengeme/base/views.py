@@ -37,6 +37,7 @@ class AllChallengesView(ListView):
         return context
 
 class InstanceDetailView(DetailView):
+    # called from url pattern r'^go/<id>/ or some shiet like that 
     model = Instance
 
     def get_context_data(self, **kwargs):
