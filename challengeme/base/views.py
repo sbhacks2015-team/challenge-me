@@ -33,7 +33,14 @@ class AllChallengesView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(AllChallengesView, self).get_context_data(**kwargs)
-        context['public_challenges'] = Instance.objects.all 
+        context['public_challenges'] = Challenge.objects.all 
+        return context
+
+class ChallengeDetailView(DetailView):
+    model = Challenge
+    
+    def get_context_data(self, **kwargs):
+        context = super(ChallengeDetailView, self).get_context_data(**kwargs)
         return context
 
 class InstanceDetailView(DetailView):
@@ -43,5 +50,4 @@ class InstanceDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(InstanceDetailView, self).get_context_data(**kwargs)
         return context
-
 
