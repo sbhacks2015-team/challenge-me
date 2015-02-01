@@ -6,7 +6,6 @@ from challengeme.base.models import Challenge, Charity, User, Instance
 class ChallengeForm(forms.Form):
     class Meta:
         model = Challenge
-        fields = ('title', 'description', 'charity')
      
 
 class InstanceForm(forms.Form):

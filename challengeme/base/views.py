@@ -5,7 +5,7 @@ import datetime
 from django.template.response import TemplateResponse
 from django.contrib.auth.decorators import login_required
 from django.forms.models import modelformset_factory
-from challengeme.base.forms import ChallengeForm, InstanceForm, NameForm
+from challengeme.base.forms import NameForm
 from challengeme.base.models import Challenge, Instance, User, Charity, Profile
 
 
@@ -16,9 +16,12 @@ class LandingPage(TemplateView):
 def new_challenge(request):
     #import pdb; pdb.set_trace()
     if request.method == "POST":
-        cform = ChallengeForm(request.POST)
+        ChallengeFormSet = modelformset_factor(Challenge)
+        cform = ChallengeFormSet()
+        if cform.is_valid():
+            new_challenge = cform.save()
+            return HttpResponseRedirect('/dashboard/')
     else:
-        #cform = ChallengeForm()
         ChallengeFormSet = modelformset_factory(Challenge)
         cform = ChallengeFormSet()
         
