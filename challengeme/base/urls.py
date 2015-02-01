@@ -4,6 +4,9 @@ from django.contrib.auth.decorators import login_required
 
 urlpatterns = patterns('',
     url(r'^$', views.poop, name='poop'),
+    url(r'^login/$', 
+        'django.contrib.auth.views.login', 
+        {'template_name': 'myapp/login.html'}),
     url(r'^challenges$', 
         login_required(views.AllChallengesView.as_view()),
         name='challenges'),
