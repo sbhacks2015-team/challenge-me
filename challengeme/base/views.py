@@ -15,17 +15,18 @@ class LandingPage(TemplateView):
 
 def new_challenge(request):
     #import pdb; pdb.set_trace()
+    ChallengeFormSet = modelform_factory(Challenge)
     if request.method == "POST":
-        ChallengeFormSet = modelform_factory(Challenge)
         cform = ChallengeFormSet(request.POST)
+        #cform.owner = request.user.id
         if cform.is_valid():
             new_challenge = cform.save()
             return HttpResponseRedirect('/dashboard/')
     else:
-        ChallengeFormSet = modelform_factory(Challenge)
         cform = ChallengeFormSet()
+        #cform.owner = request.user
         
-    return render(request, "new_challenge.html", {'cform': cform})
+    return render(request, "new_challenge.html", {'cform': cform, 'iform': iform})
 
 def test_form(request):
     if request.method == 'POST':
