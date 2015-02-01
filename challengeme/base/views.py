@@ -12,27 +12,37 @@ class LandingPage(TemplateView):
     template_name = "home.html"
 
 
-def poop(request):
-    now = datetime.datetime.now()
-    html = "<html>sup bae it's %s</html>" % now
-    return HttpResponse(html)
-
-def add_own_instance(request):
+def new_challenge(request):
+    #import pdb; pdb.set_trace()
     if request.method == "POST":
-        form = ChallengeForm(request.POST)
-        if form.is_valid():
+        cform = ChallengeForm(request.POST, instance=Challenge)
+        iform = InstanceForm(request.POST instance=Challenge)
+        if cform.is_valid() and iform.is_valid():
+            new_challenge = cform.save()
+            new_instance = iform.save(commit=False)
+            new_instance.challenge = new_challenge
+            new_instance.save()
             return HttpResponseRedirect('/dashboard/')
     else:
-        form = ChallengeForm(request.POST)
+        cform = ChallengeForm()
+        iform = InstanceForm()
+    return render_to_response('new_challenge.html', 
+            #{'challenge_form':cform,'instance_form':iform})
+            {'cform':cform, 'iform':iform})
 
-    return render(request, 'testcreate.html', {'form': form})
 
+def test_form(request):
+    if request.method == 'POST':
+        form = NameForm(request.POST)
+        if form.is_valid():
+            return HttpResponseRedirect('')
+    else:
+        form = NameForm()
 
-class TestCreate(TemplateView):
-    template_name = "testview.html"
-    
+    return render(request, 'testform.html', {'form': form})
     def get_context_data(self, **kwargs):
         context = super(TestCreate, self).get_context_data(**kwargs)
+        context['cform'] = ChallengeForm()
         return context
 
 class UserDashboard(ListView):
@@ -74,3 +84,7 @@ class InstanceDetailView(DetailView):
         context = super(InstanceDetailView, self).get_context_data(**kwargs)
         return context
 
+def poop(request):
+    now = datetime.datetime.now()
+    html = "<html>sup bae it's %s</html>" % now
+    return HttpResponse(html)

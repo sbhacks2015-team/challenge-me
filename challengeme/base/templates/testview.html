@@ -3,6 +3,12 @@
   <body>
     <h1>This is my test page</h1>
     <p>Logged in as {{user.username}}</p>
-    
+    <p>{{cform}}</p>
+    <h3>Form goes below:</h3>
+    <form action="/test/" method="post">
+      <label for="test">Your name: </label>
+      <input id="test" type="text" name="your_name" value="{{current_name }}">
+      <input type="submit" value="OK">
+    </form>
   </body>
 </html>
