@@ -1,28 +1,70 @@
 <!DOCTYPE html>
-<html>
-  <body>
-    <h1>User Dashboard!</h1>
-    <h3>List of Instances:</h3>
-    {% for inst in object_list %}
-      <p>{{inst}}</p>
-    {% endfor %}
-    <h3>Profile:</h3>
-    <p>{{user.profile}}</p>
-    <h3>Username:</h3>
-    <p>Welcome, {{user.username}}!</p>
-    <h3>First name:</h3>
-    <p>{{user.profile.first_name}}</p>
-    <h3>Last name:</h3>
-    <p>{{user.profile.last_name}}</p>
-    <h3>Email:</h3>
-    <p>{{user.profile.email}}</p>
-    <h3>Bitcoin address:</h3>
-    <p>{{user.profile.bitcoin_address}}</p>
-    <h3>Own Challenges:</h3>
-    <p>{{own_challenges}}</p>
-    <h3>Participating in these challenges:</h3>
-    <p>{{challenges_participating}}</p>
-    <h3>Supporting these challenges:</h3>
-    <p>{{challenges_supporting}}</p>
-  </body>
-</html>
+{% extends "layout.html" %}
+{% load staticfiles %}
+{% block style %}
+<link href="{% static "css/dashboard.css" %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="content container-fluid">
+  <h1 class="page-header text-left" style="font-size: 48px;">Hello, {{ user.profile.first_name }} {{ user.profile.last_name }}</small></h1>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">Challenges You've Made</div>
+        <div class="panel-body">
+          <table class="table">
+            {% for challenge in own_challenges %}
+            <tr>
+              <td>{{ challenge.title }}</td>
+              <td>{{ challenge.challenge.charity }}</td>
+              <td>{{ challenge.goal_date|timeuntil }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">Challenges You're Doing</div>
+        <div class="panel-body">
+          <table class="table">
+            {% for challenge in challenges_participating %}
+            <tr>
+              <td>{{ challenge.title }}</td>
+              <td>{{ challenge.challenge.charity }}</td>
+              <td>{{ challenge.goal_date|timeuntil }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+
+    
+      <div class="panel panel-default">
+        <div class="panel-heading">Challenges You're Supporting</div>
+        <div class="panel-body">
+          <table class="table">
+            {% for challenge in challenges_supporting %}
+            <tr>
+              <td>{{ challenge.title }}</td>
+              <td>{{ challenge.challenge.charity }}</td>
+              <td>{{ challenge.goal_date|timeuntil }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <p>@{{ user.username }}</p>
+            {{ user.profile.email }}
+            {{ user.profile.bitcoin_address }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+    {% endblock %}
