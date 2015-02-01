@@ -10,12 +10,18 @@ class Charity(models.Model):
     bitcoin_address = models.CharField(max_length=35)
     balance = models.DecimalField(default=0.00000000, max_digits=14, decimal_places=8)
 
+    def __str__(self):
+        return self.name
+
 
 class Challenge(models.Model):
     title = models.CharField(blank=False, max_length=256)
     description = models.CharField(max_length=60000)
     owner = models.ForeignKey(User)
     charity = models.ForeignKey(Charity)
+    
+    def __str__(self):
+        return self.title
 
 
 class Instance(models.Model):
@@ -33,9 +39,15 @@ class Instance(models.Model):
     owner = models.ForeignKey(User)
     participants = models.ManyToManyField(User, related_name="participants")
     supporters = models.ManyToManyField(User, related_name="supporters")
+    
+    def __str__(self):
+        return self.title
 
 
 class Profile(models.Model):
     user = models.OneToOneField(User, primary_key=True)
     balance = models.DecimalField(default=0.00000000, max_digits=14, decimal_places=8)
     bitcoin_address = models.CharField(max_length=35)
+
+    def __str__(self):
+        return "Profile for %s" % str(self.user)
