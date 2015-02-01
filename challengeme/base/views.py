@@ -29,7 +29,7 @@ def new_challenge(request):
 #    return render_to_response('new_challenge.html', 
 #            {'challenge_form':cform,'instance_form':iform})
 #            {'cform':cform, 'iform':iform})
-
+    return render(request, "new_challenge.html", {'cform': cform})
 
 def test_form(request):
     if request.method == 'POST':
