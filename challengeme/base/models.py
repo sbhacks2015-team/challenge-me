@@ -57,8 +57,6 @@ class Profile(models.Model):
     def __str__(self):
         return "Profile for %s" % str(self.user)
 
-class NameForm(forms.Form):
-    your_name = forms.CharField(label="You name", max_length=100)
 
 class ChallengeForm(ModelForm):
     class Meta:

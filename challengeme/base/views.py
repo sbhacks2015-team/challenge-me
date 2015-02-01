@@ -4,7 +4,7 @@ from django.http import HttpResponse
 import datetime
 from django.template.response import TemplateResponse
 from django.contrib.auth.decorators import login_required
-from challengeme.base.forms import ChallengeForm, InstanceForm
+from challengeme.base.forms import ChallengeForm, InstanceForm, NameForm
 from challengeme.base.models import Challenge, Instance, User, Charity, Profile
 
 
@@ -16,19 +16,19 @@ def new_challenge(request):
     #import pdb; pdb.set_trace()
     if request.method == "POST":
         cform = ChallengeForm(request.POST, instance=Challenge)
-        iform = InstanceForm(request.POST instance=Challenge)
-        if cform.is_valid() and iform.is_valid():
-            new_challenge = cform.save()
-            new_instance = iform.save(commit=False)
-            new_instance.challenge = new_challenge
-            new_instance.save()
-            return HttpResponseRedirect('/dashboard/')
+#        iform = InstanceForm(request.POST instance=Challenge)
+#        if cform.is_valid() and iform.is_valid():
+#            new_challenge = cform.save()
+#            new_instance = iform.save(commit=False)
+#            new_instance.challenge = new_challenge
+#            new_instance.save()
+#            return HttpResponseRedirect('/dashboard/')
     else:
         cform = ChallengeForm()
-        iform = InstanceForm()
-    return render_to_response('new_challenge.html', 
-            #{'challenge_form':cform,'instance_form':iform})
-            {'cform':cform, 'iform':iform})
+#        iform = InstanceForm()
+#    return render_to_response('new_challenge.html', 
+#            {'challenge_form':cform,'instance_form':iform})
+#            {'cform':cform, 'iform':iform})
 
 
 def test_form(request):

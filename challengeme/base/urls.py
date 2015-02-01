@@ -25,5 +25,5 @@ urlpatterns = patterns('',
         name='instance'),
     url(r'^test/$',
         login_required(views.test_form),
-        name='testm),
+        name='test'),
 )

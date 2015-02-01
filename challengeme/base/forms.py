@@ -17,4 +17,6 @@ class InstanceForm(forms.Form):
     bounty = models.DecimalField(blank=False, default=0.0, max_digits=14, decimal_places=8)
     participants = models.ManyToManyField(User, related_name="participants")
 
+class NameForm(forms.Form):
+    your_name = forms.CharField(label='Your name', max_length=100)
 
