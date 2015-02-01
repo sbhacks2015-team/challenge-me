@@ -1,13 +1,34 @@
 <!DOCTYPE html>
-<html>
-<body>
-  {{ user }}
-  {{ user.participants.all }}
-  <ul>
-    {% for challenge in public_challenges %}
-      <li>{{ challenge.title }} owned by {{ challenge.owner }}</li>
-    {% endfor %}
-  </ul>
+{% extends "layout.html" %}
+{% load staticfiles %}
+{% block style %}
+<link href="{% static "css/instance.css" %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="container-fluid content">
+{% for instance in public_challenges %}
+  {% if forloop.first %}<div class="row">{% endif %}
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading" style="background-color: white;"><h4><a href="/{{ instance.id }}">{{ instance.title }} by {{ instance.owner }}</a></h4></div>
+      <div class="panel-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-12">{{ instance.note }}</div>
+          </div><br>
+          <div class="row">
+            <div class="col-xs-3">{{ instance.balance|floatformat:2}}B⃦<br><small>pledged</small></div>
+            <div class="col-xs-4">{{ instance.goal_date|timeuntil }}</div>
+            <div class="col-xs-5">{{ instance.supporters.all|length }} supporters<br>{{instance.participants.all|length}} participants</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-</body>
-</html>
+  {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
+{% if forloop.last %}</div>{% endif %}
+{% endfor %} 
+</div>
+{% endblock %}
+

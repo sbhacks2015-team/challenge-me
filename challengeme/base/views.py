@@ -58,12 +58,12 @@ class UserDashboard(ListView):
         return context
     
 class AllChallengesView(ListView):
-    model = Challenge
+    model = Instance 
     template_name = 'challenges.html'
 
     def get_context_data(self, **kwargs):
         context = super(AllChallengesView, self).get_context_data(**kwargs)
-        context['public_challenges'] = Challenge.objects.all 
+        context['public_challenges'] = Instance.objects.all 
         return context
 
 
