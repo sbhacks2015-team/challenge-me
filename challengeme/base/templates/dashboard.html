@@ -15,7 +15,7 @@
           <table class="table">
             {% for challenge in own_challenges %}
             <tr>
-              <td>{{ challenge.title }}</td>
+              <td><a href="/{{ challenge.id }}">{{ challenge.title }}</a></td>
               <td>{{ challenge.challenge.charity }}</td>
               <td>{{ challenge.goal_date|timeuntil }}</td>
             </tr>
@@ -30,7 +30,7 @@
           <table class="table">
             {% for challenge in challenges_participating %}
             <tr>
-              <td>{{ challenge.title }}</td>
+              <td><a href="/{{ challenge.id }}">{{ challenge.title }}</a></td>
               <td>{{ challenge.challenge.charity }}</td>
               <td>{{ challenge.goal_date|timeuntil }}</td>
             </tr>
@@ -46,7 +46,7 @@
           <table class="table">
             {% for challenge in challenges_supporting %}
             <tr>
-              <td>{{ challenge.title }}</td>
+              <td><a href="/{{ challenge.id }}">{{ challenge.title }}</a></td>
               <td>{{ challenge.challenge.charity }}</td>
               <td>{{ challenge.goal_date|timeuntil }}</td>
             </tr>
